@@ -54,7 +54,7 @@ export class AuthService {
     return result;
   }
 
-  async login(user: { id: string; email: string; role: string }) {
+  login(user: { id: string; email: string; role: string }) {
     const payload = { sub: user.id, email: user.email, role: user.role };
     const accessToken = this.jwtService.sign(payload, {
       expiresIn: '7d',
@@ -72,7 +72,7 @@ export class AuthService {
   verifyToken(token: string) {
     try {
       return this.jwtService.verify(token, { secret: process.env.JWT_SECRET });
-    } catch (error) {
+    } catch {
       throw new UnauthorizedException('Invalid token');
     }
   }

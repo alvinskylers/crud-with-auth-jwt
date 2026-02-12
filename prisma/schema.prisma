@@ -18,13 +18,21 @@ model User {
   email       String @unique
   name        String?
   password    String
-  role        Role @default(MEMBER)
+  role        Role @default(USER)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
 }
 
 enum Role {
   ADMIN
-  MANAGER
-  MEMBER
+  USER
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  price       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
 }

@@ -30,16 +30,16 @@ export class AuthController {
     const payload = this.authService.verifyToken(refreshToken);
 
     if (payload instanceof UnauthorizedException) {
-        throw payload;
+      throw payload;
     }
 
     const user = await this.authService.findUserById(payload.sub);
 
     if (user instanceof UnauthorizedException) {
-        throw user;
+      throw user;
     }
     if (!user) {
-        throw new UnauthorizedException('User not found');
+      throw new UnauthorizedException('User not found');
     }
 
     return this.authService.login({ id: user.id, email: user.email, role: user.role });
